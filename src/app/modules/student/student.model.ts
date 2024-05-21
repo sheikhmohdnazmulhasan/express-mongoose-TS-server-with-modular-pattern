@@ -1,5 +1,6 @@
 import { Schema, model, connect } from 'mongoose';
 import { Student } from './student.interface';
+// import validator from 'validator';
 
 const studentSchema = new Schema<Student>({
 
@@ -14,11 +15,11 @@ const studentSchema = new Schema<Student>({
                 return firstNameStr === value;
             }
         },
-        lastName: { type: String, required: true }
+        lastName: { type: String, required: true, }
     }
 });
 
-const StudentModel = model<Student>('Student', studentSchema)
+const StudentModel = model<Student>('Student', studentSchema);
 
 export default StudentModel
 

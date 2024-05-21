@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { StudentService } from "./student.services";
+import StudentValidationSchema from "./student.validate";
 
 async function createStudent(req: Request, res: Response) {
-
     const data = req.body;
+    const zodParsedData = StudentValidationSchema.parse(data);
 
     try {
-        const result = await StudentService.createStudentIntoDB(data);
+        const result = await StudentService.createStudentIntoDB(zodParsedData);
 
         if (result) {
             res.status(200).json({
@@ -18,7 +19,8 @@ async function createStudent(req: Request, res: Response) {
     } catch (error) {
         res.status(400).json({
             success: false,
-            message: 'Something wrong!'
+            message: 'Something wrong!',
+            // error: zodParsedData
         });
     };
 };
