@@ -19,6 +19,8 @@ const studentSchema = new Schema<Student>({
     }
 });
 
+
+
 const StudentModel = model<Student>('Student', studentSchema);
 
 export default StudentModel
