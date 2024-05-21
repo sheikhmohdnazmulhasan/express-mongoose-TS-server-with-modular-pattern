@@ -5,9 +5,15 @@ const studentSchema = new Schema<Student>({
 
     dob: { type: String, required: true },
     email: { type: String, required: true },
-    gender: ['female', 'male'],
+    gender: { type: String, enum: ['female', 'male'], required: true },
     name: {
-        firstName: { type: String, required: true },
+        firstName: {
+            type: String, required: true,
+            validate: function (value: string) {
+                const firstNameStr = value.charAt(0).toUpperCase() + value.slice(1);
+                return firstNameStr === value;
+            }
+        },
         lastName: { type: String, required: true }
     }
 });
